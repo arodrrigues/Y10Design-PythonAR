@@ -62,7 +62,7 @@ elif request == 5:
     
     request = float(input("Please Enter You Money Below"" \n"))
 
-    if request < 3:
+    if request < 3.50:
     	print("You Need More Money")
     else:
     	print("Thanks for Your Purchase!")
