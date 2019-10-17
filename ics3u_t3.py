@@ -6,23 +6,20 @@
 
 # Put down some options for the user to choose from...
 
-print("1. Weather.")
-print("2. Classes")
-print("3. Date")
-print("4. Schedule")
+print("1. Happy")
+print("2. Sad")
+print("3. Excited")
 print(" ")
 print("Choose one of the options above")
 
-request = int(input("What do you want to know about your day? \n"))
+mood = int(input("What is your current mood? \n"))
 
-if request == 1:
-    print("The weather in Toronto is currently 16 degrees celsius and cloudy.")
-elif request == 2:
-    print ("Today you have coding, chemistry, gym, and latin.")
-elif request == 3:
-    print ("Today is Monday September 16, 2019")
-elif request == 4:
-    print ("Today is a regular schedule.")
+if mood == 1:
+    print("That's awesome!")
+elif mood == 2:
+    print ("Can I cheer you up?")
+elif mood == 3:
+    print ("I am very happy for you!")
 else:
     print ("This is not a valid choice")
     print ("Hope you have a great day anyway!")
