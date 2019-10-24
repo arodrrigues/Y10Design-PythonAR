@@ -38,50 +38,68 @@ def writeHTML(data):
     
     myfile.write("""
     <html>
+	<link rel="stylesheet" href="style.css">
 
-    <style>
- 
-    	 padding-top: 60px;
-		  background-color:aquamarine;
-		  font-family: sans-serif;
-		  align: center;
-		 }
-        h1,h2 {
-		  color: black;
-		  text-align: center;
-          padding-left: 15px;
-            padding-right: 15px;
-		}
-		
-        h3,h4 {
-            border:0px solid black;
-            margin: 5px auto;
-            padding: 10px;
-            padding-left: 35px;
-            padding-right: 35px;
-            text-align: center;
-            color: black
-            
-        }
-
-    </style>
 
 
       <head>
-        <title> MY PAGE </title>
+        <title>API</title>
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script
+
+		<canvas id="myChart" width="400" height="400"></canvas>
+		<script>
+		var ctx = document.getElementById('myChart').getContext('2d');
+		var myChart = new Chart(ctx, {
+		    type: 'bar',
+		    data: {
+		        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+		        datasets: [{
+		            label: '# of Votes',
+		            data: [12, 19, 3, 5, 2, 3],
+		            backgroundColor: [
+		                'rgba(255, 99, 132, 0.2)',
+		                'rgba(54, 162, 235, 0.2)',
+		                'rgba(255, 206, 86, 0.2)',
+		                'rgba(75, 192, 192, 0.2)',
+		                'rgba(153, 102, 255, 0.2)',
+		                'rgba(255, 159, 64, 0.2)'
+		            ],
+		            borderColor: [
+		                'rgba(255, 99, 132, 1)',
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(75, 192, 192, 1)',
+		                'rgba(153, 102, 255, 1)',
+		                'rgba(255, 159, 64, 1)'
+		            ],
+		            borderWidth: 1
+		        }]
+		    },
+		    options: {
+		        scales: {
+		            yAxes: [{
+		                ticks: {
+		                    beginAtZero: true
+		                }
+		            }]
+		        }
+		    }
+		});
+		</script>
       </head>
 
       <body>
  
         <h1> Welcome to My Financial Data Page </h1>
-        <button type="button">Click Me!</button>
-        <button type="button">Click Me!</button>
 
-        <p>Go to <a href='https://financialmodelingprep.com/api/v3/historical-price-full/AAPL?serietype=line'>The Sports DB</a> for API Info.</p>
+        <p>Go to <a href='https://financialmodelingprep.com/api/v3/historical-price-full/AAPL?serietype=line'>this API</a> for API Info.</p>
 
-        <h1 style="background-color:DodgerBlue;">Here is graph of the dates you requested</h1>
+        <h1 style="background-color:DodgerBlue;">Here is the data you requested </h1>
 
-        <p>Player name: """+ data+"""</p>
+        <p>Player name: """ + "".join(str(dates)) + """</p>
 
         <p style="font-family:verdana">This is a paragraph.</p>
 
@@ -96,25 +114,28 @@ def writeHTML(data):
     myfile.close()
 
 def main():
-    # use API to get place info
-    response = requests.get("https://financialmodelingprep.com/api/v3/historical-price-full/AAPL?serietype=line")
+	
+	response = requests.get("https://financialmodelingprep.com/api/v3/historical-price-full/AAPL?serietype=line")
+	
+	if (response.status_code == 200):
+		# data_as_str = response.decode()
+		datajson = response.json()
 
-    # if API call is correct
-    if (response.status_code == 200):
+		dataSymbol = datajson['symbol']
+		dataPoints = datajson['historical']
+		print(dataSymbol)
 
-        data = response.content # response comes in as byte data type
-        data_as_str = data.decode()    # decode to str
-        writeHTML(data_as_str)  # call function to write string data to HTML file
 
-        # load as a JSON to access specific data more easily
-        datajson = response.json()
-        data = datajson['historical']
-        
-        for point in data:
-            print(f"Date: {point['date']} \nClose: {point['close']}\n")
-        
-    else:
-        data = "Error has occured"
-        writeHTML(data)
+
+		dates = []
+
+		for point in dataPoints:
+			print(f"Date: {point['date']} \nClose: {point['close']}\n")
+			dates.append(point["date"])
+
+
+		else:
+			data = "Error has occured"
+			writeHTML(data)
 
 main()
