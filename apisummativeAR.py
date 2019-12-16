@@ -31,7 +31,7 @@ def writeHTML(data):
     myfile.write(data)
     myfile.close()
 '''
-def writeHTML(data):
+def writeHTML(data, closingPrices, dates):
     myfile = open("playerAPI.html","w") # use "a" to "append"
     
     ############### CSS
@@ -47,9 +47,10 @@ def writeHTML(data):
 
 
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script
 
-		<canvas id="myChart" width="400" height="400"></canvas>
+		<canvas id="myChart" width="300" height="200"></canvas>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script
+
 		<script>
 		var ctx = document.getElementById('myChart').getContext('2d');
 		var myChart = new Chart(ctx, {
@@ -58,7 +59,7 @@ def writeHTML(data):
 		        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
 		        datasets: [{
 		            label: '# of Votes',
-		            data: [12, 19, 3, 5, 2, 3],
+		            data: """ + "".join(str(closingPrices)) + """,
 		            backgroundColor: [
 		                'rgba(255, 99, 132, 0.2)',
 		                'rgba(54, 162, 235, 0.2)',
@@ -100,6 +101,7 @@ def writeHTML(data):
         <h1 style="background-color:DodgerBlue;">Here is the data you requested </h1>
 
         <p>Player name: """ + "".join(str(dates)) + """</p>
+		<p>Player name: """ + "".join(str(closingPrices)) + """</p>
 
         <p style="font-family:verdana">This is a paragraph.</p>
 
@@ -119,6 +121,8 @@ def main():
 	
 	if (response.status_code == 200):
 		# data_as_str = response.decode()
+		data = response.content
+		data_as_str = data.decode()
 		datajson = response.json()
 
 		dataSymbol = datajson['symbol']
@@ -128,14 +132,17 @@ def main():
 
 
 		dates = []
+		closingPrices = []
 
 		for point in dataPoints:
 			print(f"Date: {point['date']} \nClose: {point['close']}\n")
 			dates.append(point["date"])
+			closingPrices.append(point["close"])
 
+		writeHTML(data_as_str, dates, closingPrices)
 
-		else:
-			data = "Error has occured"
-			writeHTML(data)
+	else:
+		data = "Error has occured"
+		writeHTML(data, [], [])
 
 main()

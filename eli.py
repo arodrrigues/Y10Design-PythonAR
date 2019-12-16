@@ -99,7 +99,7 @@ def writeHTML(data, closingPrices, dates):
         
             type: 'bar',
             data: {
-                labels: """ + "".join(str(dates)) + """,
+                labels: """ + ",".join(str(dates)) + """,
                 datasets: [{
                     label: 'Closing Prices of Apple From 2014 to Present Day (In $$$)',
                     

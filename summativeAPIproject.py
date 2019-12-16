@@ -9,7 +9,7 @@ import pprint
 
 
 def writeHTML(data, closingPrices, dates):
-    myfile = open("SummativeAR.html","w")
+    myfile = open("copy.html","w")
     myfile.write("""
     
     <!DOCTYPE html>
@@ -19,10 +19,12 @@ def writeHTML(data, closingPrices, dates):
     
     <title>API Home Page</title>
     
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../HTML/homestyle.css">
     <link rel='icon' href='favicon (1).ico' type='image/x-icon'/ >
-
-    <p class="headingtext"> The below graph shows Apple closing prices from 1989 to present day.</p>
+    <ul>
+        <li><a href="../HTML/eli.html" id="special"class="left" style="float:left;">Home</a></li>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </ul>
     
     """)
 
@@ -60,15 +62,15 @@ def writeHTML(data, closingPrices, dates):
         elif date[:4] == "2014":
             bgColors.append("'rgba(0, 255, 0, 1)'")
         elif date[:4] == "2015":
-            bgColors.append("'rgba(0, 255, 0, 1)'")
+            bgColors.append("'rgba(255, 255, 0, 1)'")
         elif date[:4] == "2016":
-            bgColors.append("'rgba(0, 255, 0, 1)'")
+            bgColors.append("'rgba(255, 0, 0, 1)'")
         elif date[:4] == "2017":
-            bgColors.append("'rgba(0, 255, 0, 1)'")
+            bgColors.append("'rgba(0, 0, 255, 1)'")
         elif date[:4] == "2018":
-            bgColors.append("'rgba(0, 255, 0, 1)'")
+            bgColors.append("'rgba(255, 0, 255, 1)'")
         elif date[:4] == "2019":
-            bgColors.append("'rgba(0, 255, 0, 1)'")
+            bgColors.append("'rgba(0, 255, 255, 1)'")
 
 
     twothousand = []
@@ -156,44 +158,34 @@ def writeHTML(data, closingPrices, dates):
             twothousandnineteen.append(closingPrices[index])
         index += 1
     
-    # print(twothousandone)
-    # print(twothousandtwo)
-    # print(twothousandthree)
-    # print(twothousandfour)
-    # print(twothousandfive)
-    # print(twothousandsix)
-    # print(twothousandseven)
-    # print(twothousandeight)
-    # print(twothousandnine)
-    # print(twothousandten)
-    # print(twothousandeleven)
-    # print(twothousandtwelve)
-    # print(twothousandthirteen)
-    # print(twothousandfourteen)
-    # print(twothousandfifteen)
-    # print(twothousandsixteen)
-    # print(twothousandseventeen)
-    # print(twothousandeighteen)
-    # print(twothousandnineteen)
-
-    print(len(dates))
-    print(len(closingPrices))
-    print(len(bgColors))
+    print(twothousandone)
+    print(twothousandtwo)
+    print(twothousandthree)
+    print(twothousandfour)
+    print(twothousandfive)
+    print(twothousandsix)
+    print(twothousandseven)
+    print(twothousandeight)
+    print(twothousandnine)
+    print(twothousandten)
+    print(twothousandeleven)
+    print(twothousandtwelve)
+    print(twothousandthirteen)
+    print(twothousandfourteen)
+    print(twothousandfifteen)
+    print(twothousandsixteen)
+    print(twothousandseventeen)
+    print(twothousandeighteen)
+    print(twothousandnineteen)
 
 
     myfile.write("""
-
-     <!DOCTYPE html>
-    <html>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-    <head>
-    
-    <title>API Home Page</title>
-    
-    <link rel="stylesheet" href="../HTML/homestyle.css">
-    <link rel='icon' href='favicon (1).ico' type='image/x-icon'/ >
-
-
+        
+        <div class="headerAPI" id="home">
+            <p id="big"><b>Apple API Display</b></p>
+            <p id="small">This website is displaying data from an Apple API.</p>
+            <p></p>
+        </div>
         
         <canvas id="myChart" width="300" height="200"></canvas>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
@@ -203,9 +195,9 @@ def writeHTML(data, closingPrices, dates):
         
             type: 'bar',
             data: {
-                labels: """ + "".join(str(dates)) + """,
+                labels: """ + ",".join(str(dates)) + """,
                 datasets: [{
-                    label: 'Closing Prices of Apple From 1989 (In $$$)',
+                    label: 'Closing Prices of Apple From 2014 to Present Day (In $$$)',
                     
                     data: """ + "".join(str(closingPrices)) + """,
                     backgroundColor: [""" + ",".join(bgColors) + """],
@@ -239,7 +231,41 @@ def writeHTML(data, closingPrices, dates):
         </head>
         <body>
             
-
+            <div class="rowapi" id="rowapi">
+                <div class="column">
+                    <a href="https://financialmodelingprep.com/api/v3/historical-price-full/AAPL" style="text-decoration:none;" target="_blank">
+                    <img src="../HTML/ImagesHTML/apiuseddoc.png" style="width:100%" onclick="" class="hover-shadow cursor">
+                    <div class="overlay">
+                    <div class="text">API Used</div>
+                    </div>
+                </div>
+            
+                
+                <div class="column">
+                    <a href="https://www.chartjs.org/docs/latest/" style="text-decoration:none;" target="_blank">
+                    <img src="../HTML/ImagesHTML/gettingstarted.png" style="width:100%" onclick="" class="hover-shadow cursor">
+                    <div class="overlay">
+                    <div class="text">Chart JS; Used For Graph</div>
+                    </div>
+                </div>
+                <div class="column">
+                    <a href="https://github.com/EliPreston" style="text-decoration:none;">
+                    <img src="../HTML/ImagesHTML/github-logo.jpeg" style="width:100%" onclick="" class="hover-shadow cursor">
+                    <div class="overlay">
+                    <div class="text">GitHub</div>
+                    </div>
+                </div>
+            
+                
+                <div class="column">
+                    <a href="https://sites.google.com/ucc.on.ca/y10design-epres" style="text-decoration:none;">
+                    <img src="../HTML/ImagesHTML/googlesitesnew99.png" style="width:100%" onclick="" class="hover-shadow cursor">
+                    <div class="overlay">
+                    <div class="text">Google Site</div>
+                    </div>
+                </div>
+            
+            </div>
             
         </body>
     </html>
@@ -259,7 +285,7 @@ def main():
         
         dataSymbol = datajson['symbol']
         dataPoints = datajson['historical']
-        # print(dataSymbol)
+        print(dataSymbol)
 
 
 
@@ -268,7 +294,7 @@ def main():
 
 
         for point in dataPoints:
-            # print(f"Date: {point['date']} \nClose: {point['close']}\n")
+            print(f"Date: {point['date']} \n\tClosing Price: {point['close']}")
             closingPrices.append(point["close"])
             dates.append(point["date"])
 
