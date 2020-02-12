@@ -60,6 +60,19 @@ body {
   color: black;
 }
 
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 15px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
           </style>
  
     </head>
@@ -83,13 +96,29 @@ body {
             <input type="text" id="team" value="Enter Team">
             <input type="text" id="player" value="Enter Player">
 
-            <button onclick = "setData()" >Set Data</button>
-            <button onclick = "getData()" >Get data</button>
+            <button onclick = "setData()" >Add New Player</button>
+            <button onclick = "getData()" >Show Player List</button>
 
             <p>Current Data:</p>
 
             <!-- ol means ordered list -->
-            <p><ol id="positionList"></ol><ol id="teamList"></ol><ol id="playerList"></ol></p>    
+            <div class="row">
+  <div class="column">
+    <p><ol id="positionList"></ol>
+    
+  </div>
+                     <div class="row">
+  <div class="column">
+    <ol id="teamList"></ol>
+    
+  </div>
+                     <div class="row">
+  <div class="column">
+    <ol id="playerList"></ol></p>  
+    
+  </div>
+  
+                            
                  
     </body>
     
